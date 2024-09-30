@@ -29,11 +29,10 @@ Contact: Michael Faschinger - michfasch@gmx.at
 */
 
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace DataMatrix.net
 {
@@ -56,7 +55,7 @@ namespace DataMatrix.net
 
         public Bitmap EncodeImageMosaic(string val, int dotSize, int margin)
         {
-            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions {MarginSize = margin, ModuleSize = dotSize};
+            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions { MarginSize = margin, ModuleSize = dotSize };
             return EncodeImageMosaic(val, options);
         }
 
@@ -122,7 +121,7 @@ namespace DataMatrix.net
 
         public Bitmap EncodeImage(string val, int dotSize, int margin)
         {
-            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions {MarginSize = margin, ModuleSize = dotSize};
+            DmtxImageEncoderOptions options = new DmtxImageEncoderOptions { MarginSize = margin, ModuleSize = dotSize };
             return EncodeImage(val, options);
         }
 
@@ -166,12 +165,12 @@ namespace DataMatrix.net
         public string EncodeSvgImage(string val, int dotSize, int margin, Color foreColor, Color backColor)
         {
             DmtxImageEncoderOptions options = new DmtxImageEncoderOptions
-                                                  {
-                                                      ModuleSize = dotSize,
-                                                      MarginSize = margin,
-                                                      ForeColor = foreColor,
-                                                      BackColor = backColor
-                                                  };
+            {
+                ModuleSize = dotSize,
+                MarginSize = margin,
+                ForeColor = foreColor,
+                BackColor = backColor
+            };
             return EncodeSvgImage(val, options);
         }
 
@@ -183,12 +182,12 @@ namespace DataMatrix.net
         public bool[,] EncodeRawData(string val, DmtxImageEncoderOptions options)
         {
             DmtxEncode encode = new DmtxEncode
-                                    {
-                                        ModuleSize = 1,
-                                        MarginSize = 0,
-                                        SizeIdxRequest = options.SizeIdx,
-                                        Scheme = options.Scheme
-                                    };
+            {
+                ModuleSize = 1,
+                MarginSize = 0,
+                SizeIdxRequest = options.SizeIdx,
+                Scheme = options.Scheme
+            };
 
             byte[] valAsByteArray = GetRawDataAndSetEncoding(val, options, encode);
 
@@ -200,12 +199,12 @@ namespace DataMatrix.net
         public string EncodeSvgImage(string val, DmtxImageEncoderOptions options)
         {
             DmtxEncode encode = new DmtxEncode
-                                    {
-                                        ModuleSize = options.ModuleSize,
-                                        MarginSize = options.MarginSize,
-                                        SizeIdxRequest = options.SizeIdx,
-                                        Scheme = options.Scheme
-                                    };
+            {
+                ModuleSize = options.ModuleSize,
+                MarginSize = options.MarginSize,
+                SizeIdxRequest = options.SizeIdx,
+                Scheme = options.Scheme
+            };
 
             byte[] valAsByteArray = GetRawDataAndSetEncoding(val, options, encode);
 
@@ -263,7 +262,7 @@ namespace DataMatrix.net
 
             if (_dotFormatProvider == null)
             {
-                _dotFormatProvider = new NumberFormatInfo {NumberDecimalSeparator = "."};
+                _dotFormatProvider = new NumberFormatInfo { NumberDecimalSeparator = "." };
             }
 
             if (format == "svg:")

@@ -35,24 +35,22 @@ namespace DataMatrix.net
     internal struct DmtxScanGrid
     {
         #region Fields
-        int _minExtent;
-        int _maxExtent;
-        int _xOffset;
-        int _yOffset;
-        int _xMin;
-        int _xMax;
-        int _yMin;
-        int _yMax;
-
-        int _total;
-        int _extent;
-        int _jumpSize;
-        int _pixelTotal;
-        int _startPos;
-
-        int _pixelCount;
-        int _xCenter;
-        int _yCenter;
+        private int _minExtent;
+        private int _maxExtent;
+        private int _xOffset;
+        private int _yOffset;
+        private int _xMin;
+        private int _xMax;
+        private int _yMin;
+        private int _yMax;
+        private int _total;
+        private int _extent;
+        private int _jumpSize;
+        private int _pixelTotal;
+        private int _startPos;
+        private int _pixelCount;
+        private int _xCenter;
+        private int _yCenter;
         #endregion
 
         #region Constructors
@@ -84,7 +82,7 @@ namespace DataMatrix.net
                 }
             }
 
-            this._maxExtent = extent ;
+            this._maxExtent = extent;
 
             this._xOffset = (this._xMin + this._xMax - this._maxExtent) / 2;
             this._yOffset = (this._yMin + this._yMax - this._maxExtent) / 2;

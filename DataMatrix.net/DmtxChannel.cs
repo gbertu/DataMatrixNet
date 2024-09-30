@@ -32,7 +32,7 @@ namespace DataMatrix.net
 {
     internal class DmtxChannel
     {
-        byte[] _encodedWords;
+        private byte[] _encodedWords;
 
         internal byte[] Input { get; set; }
 
@@ -56,7 +56,7 @@ namespace DataMatrix.net
 
     internal class DmtxChannelGroup
     {
-        DmtxChannel[] _channels;
+        private DmtxChannel[] _channels;
 
         internal DmtxChannel[] Channels
         {

@@ -32,7 +32,7 @@ namespace DataMatrix.net
 {
     internal struct DmtxTriplet
     {
-        byte[] _value;
+        private byte[] _value;
 
         internal byte[] Value
         {
@@ -46,7 +46,7 @@ namespace DataMatrix.net
      */
     internal struct DmtxQuadruplet
     {
-        byte[] _value;
+        private byte[] _value;
 
         internal byte[] Value
         {

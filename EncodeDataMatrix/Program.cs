@@ -28,22 +28,21 @@ Contact: Michael Faschinger - michfasch@gmx.at
  
 */
 
+using DataMatrix.net;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using DataMatrix.net;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 
 namespace EncodeDataMatrix
 {
-    class Program
+    internal class Program
     {
-        static List<string> helpArgs = new List<string>(new string[] { "-h", "-H", "-?", "--help", "/h", "/H", "/?" });
-        static List<string> supportedArgs = new List<string>(new string[] { "-i", "-c", "-o", "-s", "-b", "-f", "-t", "-m" });
+        private static List<string> helpArgs = new List<string>(new string[] { "-h", "-H", "-?", "--help", "/h", "/H", "/?" });
+        private static List<string> supportedArgs = new List<string>(new string[] { "-i", "-c", "-o", "-s", "-b", "-f", "-t", "-m" });
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length == 0 || (args.Length == 1 && IsHelp(args[0])))
             {

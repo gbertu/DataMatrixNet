@@ -179,8 +179,8 @@ namespace DataMatrix.net
      148,   5,  10,  20,  40,  80, 160, 109, 218, 153,  31,  62, 124, 248, 221, 151,
        3,   6,  12,  24,  48,  96, 192, 173, 119, 238, 241, 207, 179,  75, 150,   1 };
 
-         internal static readonly int[] logVal =
-   {-255, 255,   1, 240,   2, 225, 241,  53,   3,  38, 226, 133, 242,  43,  54, 210,
+        internal static readonly int[] logVal =
+  {-255, 255,   1, 240,   2, 225, 241,  53,   3,  38, 226, 133, 242,  43,  54, 210,
        4, 195,  39, 114, 227, 106, 134,  28, 243, 140,  44,  23,  55, 118, 211, 234,
        5, 219, 196,  96,  40, 222, 115, 103, 228,  78, 107, 125, 135,   8,  29, 162,
      244, 186, 141, 180,  45,  99,  24,  49,  56,  13, 119, 153, 212, 199, 235,  91,
@@ -348,14 +348,14 @@ namespace DataMatrix.net
         DmtxEdgeRight = 0x01 << 3
     }
 
-    enum DmtxChannelStatus
+    internal enum DmtxChannelStatus
     {
         DmtxChannelValid = 0x00,
         DmtxChannelUnsupportedChar = 0x01 << 0,
         DmtxChannelCannotUnlatch = 0x01 << 1
     }
 
-    enum DmtxUnlatch
+    internal enum DmtxUnlatch
     {
         Explicit,
         Implicit

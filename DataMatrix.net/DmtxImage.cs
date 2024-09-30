@@ -36,7 +36,7 @@ namespace DataMatrix.net
     {
         #region Fields
 
-        int _rowPadBytes;
+        private int _rowPadBytes;
 
         #endregion
 

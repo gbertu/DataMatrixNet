@@ -102,7 +102,7 @@ namespace DataMatrix.net
         {
             if (a == 0 || b == 0)
                 return 0;
-            
+
             return (byte)DmtxConstants.aLogVal[(DmtxConstants.logVal[a] + DmtxConstants.logVal[b]) % 255];
         }
 
@@ -117,7 +117,7 @@ namespace DataMatrix.net
                 return 0;
             if (b == 0)
                 return a; /* XXX this is right, right? */
-            
+
             return (byte)DmtxConstants.aLogVal[(DmtxConstants.logVal[a] + b) % 255];
         }
 

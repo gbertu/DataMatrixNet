@@ -35,7 +35,7 @@ namespace DataMatrix.net
     internal class DmtxMessage
     {
         #region Fields
-        int _outputIdx;     /* Internal index used to store output progress */
+        private int _outputIdx;     /* Internal index used to store output progress */
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace DataMatrix.net
                 macro = true;
             }
 
-            for (int codeIter = 0; codeIter < dataEndIndex; )
+            for (int codeIter = 0; codeIter < dataEndIndex;)
             {
 
                 DmtxScheme encScheme = GetEncodationScheme(this.Code[codeIter]);
@@ -135,18 +135,18 @@ namespace DataMatrix.net
             PushOutputWord(29); /* ASCII GS */
         }
 
-        void PushOutputMacroTrailer()
+        private void PushOutputMacroTrailer()
         {
             PushOutputWord(30); /* ASCII RS */
             PushOutputWord(4);  /* ASCII EOT */
         }
 
-        void PushOutputWord(byte value)
+        private void PushOutputWord(byte value)
         {
             this.Output[this._outputIdx++] = value;
         }
 
-        static DmtxScheme GetEncodationScheme(byte val)
+        private static DmtxScheme GetEncodationScheme(byte val)
         {
             if (val == DmtxConstants.DmtxCharC40Latch)
             {
@@ -171,7 +171,7 @@ namespace DataMatrix.net
             return DmtxScheme.DmtxSchemeAscii;
         }
 
-        int DecodeSchemeAscii(int startIndex, int endIndex)
+        private int DecodeSchemeAscii(int startIndex, int endIndex)
         {
             bool upperShift = false;
 
@@ -182,7 +182,7 @@ namespace DataMatrix.net
 
                 if (GetEncodationScheme(this.Code[startIndex]) != DmtxScheme.DmtxSchemeAscii)
                     return startIndex;
-                
+
                 startIndex++;
 
                 if (upperShift)
@@ -214,10 +214,10 @@ namespace DataMatrix.net
             return startIndex;
         }
 
-        int DecodeSchemeC40Text(int startIndex, int endIndex, DmtxScheme encScheme)
+        private int DecodeSchemeC40Text(int startIndex, int endIndex, DmtxScheme encScheme)
         {
             int[] c40Values = new int[3];
-            C40TextState state = new C40TextState {Shift = DmtxConstants.DmtxC40TextBasicSet, UpperShift = false};
+            C40TextState state = new C40TextState { Shift = DmtxConstants.DmtxC40TextBasicSet, UpperShift = false };
 
 
             if (!(encScheme == DmtxScheme.DmtxSchemeC40 || encScheme == DmtxScheme.DmtxSchemeText))
@@ -321,7 +321,7 @@ namespace DataMatrix.net
             return startIndex;
         }
 
-        void PushOutputC40TextWord(ref C40TextState state, int value)
+        private void PushOutputC40TextWord(ref C40TextState state, int value)
         {
             if (!(value >= 0 && value < 256))
             {
@@ -387,7 +387,7 @@ namespace DataMatrix.net
             return startIndex;
         }
 
-        int DecodeSchemeEdifact(int startIndex, int endIndex)
+        private int DecodeSchemeEdifact(int startIndex, int endIndex)
         {
             byte[] unpacked = new byte[4];
 
@@ -431,7 +431,7 @@ namespace DataMatrix.net
             return startIndex;
         }
 
-        int DecodeSchemeBase256(int startIndex, int endIndex)
+        private int DecodeSchemeBase256(int startIndex, int endIndex)
         {
             int tempEndIndex;
 

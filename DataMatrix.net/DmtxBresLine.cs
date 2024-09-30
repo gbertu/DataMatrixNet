@@ -35,19 +35,19 @@ namespace DataMatrix.net
     internal struct DmtxBresLine
     {
         #region Fields
-        int _xStep;
-        int _yStep;
-        int _xDelta;
-        int _yDelta;
-        bool _steep;
-        int _xOut;
-        int _yOut;
-        int _travel;
-        int _outward;
-        int _error;
-        DmtxPixelLoc _loc;
-        DmtxPixelLoc _loc0;
-        DmtxPixelLoc _loc1;
+        private int _xStep;
+        private int _yStep;
+        private int _xDelta;
+        private int _yDelta;
+        private bool _steep;
+        private int _xOut;
+        private int _yOut;
+        private int _travel;
+        private int _outward;
+        private int _error;
+        private DmtxPixelLoc _loc;
+        private DmtxPixelLoc _loc0;
+        private DmtxPixelLoc _loc1;
         #endregion
 
         #region Constructors

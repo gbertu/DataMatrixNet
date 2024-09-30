@@ -28,22 +28,20 @@ Contact: Michael Faschinger - michfasch@gmx.at
  
 */
 
+using DataMatrix.net;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using DataMatrix.net;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace DataMatrixTest
 {
-    class Program
+    internal class Program
     {
         private static string testVal = "Hello World!";
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             TestMatrixEnDecoder();
             TestMosaicEnDecoder();
@@ -78,12 +76,12 @@ namespace DataMatrixTest
             TestRawEncoder("HELLO WORLD");
             new DmtxImageEncoder().EncodeImage("HELLO WORLD").Save("helloWorld.png");
 
-            for(int i = 1; i < 10; i++)
+            for (int i = 1; i < 10; i++)
             {
                 var encodedData = Guid.NewGuid().ToString();
                 Bitmap source = encoder.EncodeImage(encodedData);
                 var decodedData = decoder.DecodeImage(source);
-                if(decodedData.Count != 1 || decodedData[0] != encodedData)
+                if (decodedData.Count != 1 || decodedData[0] != encodedData)
                     throw new Exception("Encoding or decoding failed!");
             }
         }

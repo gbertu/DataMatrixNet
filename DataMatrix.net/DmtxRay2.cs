@@ -34,8 +34,8 @@ namespace DataMatrix.net
     {
         #region Fields
 
-        DmtxVector2 _p;
-        DmtxVector2 _v;
+        private DmtxVector2 _p;
+        private DmtxVector2 _v;
         #endregion
 
         #region Properties

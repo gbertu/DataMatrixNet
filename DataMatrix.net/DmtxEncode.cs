@@ -37,18 +37,18 @@ namespace DataMatrix.net
     internal class DmtxEncode
     {
         #region Fields
-        int _method;
-        DmtxScheme _scheme;
-        DmtxSymbolSize _sizeIdxRequest;
-        int _marginSize;
-        int _moduleSize;
-        DmtxPackOrder _pixelPacking;
-        DmtxFlip _imageFlip;
-        int _rowPadBytes;
-        DmtxMessage _message;
-        DmtxImage _image;
-        DmtxRegion _region;
-        bool[,] _rawData;
+        private int _method;
+        private DmtxScheme _scheme;
+        private DmtxSymbolSize _sizeIdxRequest;
+        private int _marginSize;
+        private int _moduleSize;
+        private DmtxPackOrder _pixelPacking;
+        private DmtxFlip _imageFlip;
+        private int _rowPadBytes;
+        private DmtxMessage _message;
+        private DmtxImage _image;
+        private DmtxRegion _region;
+        private bool[,] _rawData;
         #endregion
 
         #region Constructors
@@ -419,7 +419,7 @@ namespace DataMatrix.net
             return (byte)tmp;
         }
 
-        int EncodeDataCodewords(byte[] buf, byte[] inputString, ref DmtxSymbolSize sizeIdx)
+        private int EncodeDataCodewords(byte[] buf, byte[] inputString, ref DmtxSymbolSize sizeIdx)
         {
             int dataWordCount;
 
@@ -976,7 +976,7 @@ namespace DataMatrix.net
                 int ptrIndex = channel.InputIndex;
 
                 int tripletCount = 0;
-                for (;;)
+                for (; ; )
                 {
 
                     /* Fill array with at least 3 values (the minimum necessary to

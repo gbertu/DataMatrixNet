@@ -34,7 +34,7 @@ namespace DataMatrix.net
     {
         #region Fields
 
-        int _ptrIndex;
+        private int _ptrIndex;
         #endregion
 
         #region Properties
