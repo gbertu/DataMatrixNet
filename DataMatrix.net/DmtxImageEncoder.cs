@@ -67,35 +67,48 @@ namespace DataMatrix.net
 
         private Bitmap EncodeImage(string val, DmtxImageEncoderOptions options, bool isMosaic)
         {
-			byte[] valAsByteArray = options.Encoding.GetBytes(val);
+            DmtxEncode encode = new DmtxEncode
+            {
+                ModuleSize = options.ModuleSize,
+                MarginSize = options.MarginSize,
+                SizeIdxRequest = options.SizeIdx
+            };
+            byte[] valAsByteArray = GetRawDataAndSetEncoding(val, options, encode);
 
-			return EncodeImage(valAsByteArray, options, isMosaic);
+            return EncodeImage(valAsByteArray, options, encode, isMosaic);
         }
 
-		private static Bitmap EncodeImage(byte[] valAsByteArray, DmtxImageEncoderOptions options, bool isMosaic)
-		{
-			DmtxEncode encode = new DmtxEncode
-			{
-				ModuleSize = options.ModuleSize,
-				MarginSize = options.MarginSize,
-				SizeIdxRequest = options.SizeIdx,
-				Scheme = options.Scheme,
-			};
-			if (isMosaic)
-			{
-				encode.EncodeDataMosaic(valAsByteArray);
-			}
-			else
-			{
-				encode.EncodeDataMatrix(options.ForeColor, options.BackColor, valAsByteArray);
-			}
-			if (encode.Image == null)
-			{
-				throw new System.Exception("Unable to encode data matrix");
-			}
+        private static byte[] GetRawDataAndSetEncoding(string code, DmtxImageEncoderOptions options, DmtxEncode encode)
+        {
+            byte[] result = options.Encoding.GetBytes(code);
+            encode.Scheme = options.Scheme;
+            if (options.Scheme == DmtxScheme.DmtxSchemeAsciiGS1)
+            {
+                List<byte> prefixedRawData = new List<byte>(new[] { (byte)232 });
+                prefixedRawData.AddRange(result);
+                result = prefixedRawData.ToArray();
+                encode.Scheme = DmtxScheme.DmtxSchemeAscii;
+            }
+            return result;
+        }
 
-			return CopyDataToBitmap(encode.Image.Pxl, encode.Image.Width, encode.Image.Height);
-		}
+        private static Bitmap EncodeImage(byte[] valAsByteArray, DmtxImageEncoderOptions options, DmtxEncode encode, bool isMosaic)
+        {
+            if (isMosaic)
+            {
+                encode.EncodeDataMosaic(valAsByteArray);
+            }
+            else
+            {
+                encode.EncodeDataMatrix(options.ForeColor, options.BackColor, valAsByteArray);
+            }
+            if (encode.Image == null)
+            {
+                throw new System.Exception("Unable to encode data matrix");
+            }
+
+            return CopyDataToBitmap(encode.Image.Pxl, encode.Image.Width, encode.Image.Height);
+        }
 
         public Bitmap EncodeImage(string val)
         {
@@ -118,10 +131,22 @@ namespace DataMatrix.net
             return EncodeImage(val, options, false);
         }
 
-		public Bitmap EncodeImage(byte[] val, DmtxImageEncoderOptions options)
-		{
-			return EncodeImage(val, options, isMosaic: false);
-		}
+        public Bitmap EncodeImage(byte[] val, DmtxImageEncoderOptions options)
+        {
+            return EncodeImage(val, options, isMosaic: false);
+        }
+
+        public Bitmap EncodeImage(byte[] val, DmtxImageEncoderOptions options, bool isMosaic)
+        {
+            DmtxEncode encode = new DmtxEncode
+            {
+                ModuleSize = options.ModuleSize,
+                MarginSize = options.MarginSize,
+                SizeIdxRequest = options.SizeIdx,
+                Scheme = options.Scheme
+            };
+            return EncodeImage(val, options, encode, isMosaic);
+        }
 
         public string EncodeSvgImage(string val)
         {
@@ -165,7 +190,7 @@ namespace DataMatrix.net
                                         Scheme = options.Scheme
                                     };
 
-			byte[] valAsByteArray = options.Encoding.GetBytes(val);
+            byte[] valAsByteArray = GetRawDataAndSetEncoding(val, options, encode);
 
             encode.EncodeDataMatrixRaw(valAsByteArray);
 
@@ -182,7 +207,7 @@ namespace DataMatrix.net
                                         Scheme = options.Scheme
                                     };
 
-			byte[] valAsByteArray = options.Encoding.GetBytes(val);
+            byte[] valAsByteArray = GetRawDataAndSetEncoding(val, options, encode);
 
             encode.EncodeDataMatrix(options.ForeColor, options.BackColor, valAsByteArray);
 
